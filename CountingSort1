@@ -1,0 +1,10 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+
+n = int(raw_input())
+nums = map(int, raw_input().split())
+cntarr = [0] * 100
+
+for each in nums:
+    cntarr[each] += 1
+    
+print ''.join(str(nm)+ ' ' for nm in cntarr)
