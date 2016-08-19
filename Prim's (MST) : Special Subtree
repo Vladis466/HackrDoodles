@@ -1,0 +1,45 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+finaldic = {}
+temp = [3]
+nodes, edges  = map(int,raw_input().split(' '))
+L = [[y for x in range(1)] for y in xrange(1,edges)] 
+
+for e in xrange(len(L)):
+    L[e].append({})
+
+# 100k is the biggest weight possible
+finaldic = {i:100001 for i in xrange(1,edges)}
+
+# add all the entries to the adjacency list. That last line looks a bit funky
+# because you are adding entries to dictionaries in a list
+for e in xrange(edges):
+    temp = map(int,raw_input().split(' '))
+    L[temp[0]-1][1][temp[1]] = temp[2]
+
+print L
+
+# Starting point has a cost of 0 to reach it
+start = int(raw_input())
+finaldic[start] = 0
+
+#Empty dictionaries evaluate to false
+for dicts in L:
+    for key in dicts[1]:
+        if dicts[1][key] < finaldic[key]:
+            finaldic[key] = dicts[1][key]
+        if dicts[1][key] < finaldic[dicts[0]] and finaldic[dicts[0]] > 100000:
+            finaldic[dicts[0]] = dicts[1][key]
+           
+    
+    
+    
+    
+#iterr = L[start - 1]
+#if iterr[1]: 
+    #smallest = min(iterr[1], key=iterr[1].get)
+    #finaldic[smallest] = iterr[1][smallest]
+
+print finaldic
+print sum(finaldic.values())
+        
+    #break
